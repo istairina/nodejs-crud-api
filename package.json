@@ -7,6 +7,7 @@
     "dev": "cross-env NODE_ENV=development ts-node-dev --no-notify --respawn --transpile-only src/app.ts",
     "build": "npx tsc",
     "start": "tsc && node dist/app.js",
+    "start:dev": "npx nodemon",
     "lint": "eslint . --ext .ts"
   },
   "repository": {
@@ -23,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "eslint": "^8.43.0",
+    "nodemon": "^2.0.22",
     "ts-loader": "^9.4.3",
     "typescript": "^5.1.5",
     "webpack": "^5.88.0",
