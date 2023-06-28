@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-crud-api",
+  "version": "0.0.1",
+  "description": "task for rss https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/istairina/nodejs-crud-api.git"
+  },
+  "author": "Irina Migunova (istairina)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/istairina/nodejs-crud-api/issues"
+  },
+  "homepage": "https://github.com/istairina/nodejs-crud-api#readme"
+}
