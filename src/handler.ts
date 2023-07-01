@@ -2,6 +2,7 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
 import {parse} from 'node:url';
 import { DEFAULT_HEADER } from './util/util';
+import { routes } from './routes/usersRoutes';
 
 type handlerProps = {
     request?: IncomingMessage,
@@ -12,12 +13,10 @@ type allRoutesTypes = {
     [key: string]: ({request, response}: handlerProps) => void;
 }
 
+const userRoutes = routes({userService: {}});
+
 const allRoutes:allRoutesTypes = {
-    '/users:get': async ({response}: handlerProps) => {
-        response.writeHead(200, DEFAULT_HEADER);
-        response.write('Your users\'re here');
-        response.end();
-    },
+    ...userRoutes,
     default: ({response}: handlerProps) => {
         response.writeHead(404, DEFAULT_HEADER);
         response.write('Unknown request. Please try another one');

@@ -8,7 +8,7 @@ test('Users tests', async (t) => {
     const {server} = await import('../src/app');
     const testServerAddress = `http://localhost:${testPort}/users`;
 
-    await t.test('it should create a user', async (t) => {
+    await t.test('it should create a user', async () => {
         const data = {
             username: 'IM',
             age: 88,
