@@ -4,7 +4,7 @@
   "description": "task for rss https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md",
   "main": "dist/app.js",
   "scripts": {
-    "dev": "cross-env PORT=3000 NODE_ENV=development ts-node-dev --no-notify --respawn --transpile-only src/app.ts",
+    "dev": "cross-env NODE_ENV=development ts-node-dev --no-notify --respawn --transpile-only src/app.ts",
     "build": "npx tsc",
     "start": "tsc && node dist/app.js",
     "start:dev": "npx nodemon",
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0"
   }
