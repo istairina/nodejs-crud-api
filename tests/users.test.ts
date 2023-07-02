@@ -4,8 +4,8 @@ import {promisify} from 'node:util';
 
 test('Users tests', async (t) => {
     const testPort = 5005;
-    process.env.PORT = testPort;
-    const {server} = await import('../src/app');
+    process.env.PORT = String(testPort);
+    const {server} = await import('../src');
     const testServerAddress = `http://localhost:${testPort}/users`;
 
     await t.test('it should create a user', async () => {

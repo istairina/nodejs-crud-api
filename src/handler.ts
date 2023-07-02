@@ -1,21 +1,29 @@
 
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { IncomingMessage, ServerResponse } from 'node:http';
 import {parse} from 'node:url';
-import { DEFAULT_HEADER } from './util/util';
-import { routes } from './routes/usersRoutes';
+import { DEFAULT_HEADER } from './util/util.ts';
+import { routes } from './routes/usersRoutes.ts';
+import { generateInstance } from './factory/userFactory.ts';
+import UserService from './services/userService.ts';
 
-type handlerProps = {
+export type handlerProps = {
     request?: IncomingMessage,
-    response?: ServerResponse,
+    response: ServerResponse<IncomingMessage>,
 };
 
 type allRoutesTypes = {
     [key: string]: ({request, response}: handlerProps) => void;
 }
 
-const userRoutes = routes({userService: {}});
+const currDir = dirname(fileURLToPath(import.meta.url));
+const filePath = join(currDir, './../database', 'db.json');
+const userService: UserService = generateInstance(filePath);
 
-const allRoutes:allRoutesTypes = {
+const userRoutes = routes({userService});
+
+const allRoutes: allRoutesTypes = {
     ...userRoutes,
     default: ({response}: handlerProps) => {
         response.writeHead(404, DEFAULT_HEADER);
@@ -29,7 +37,6 @@ export const handler: (arg0: IncomingMessage, arg1: ServerResponse) => Promise<v
     const {url, method} = request;
     const { pathname } = parse(url, true);
     const key = `${pathname}:${method.toLowerCase()}`;
-    console.log(key);
     const chosen = allRoutes[key] || allRoutes.default;
     return Promise.resolve(chosen({request, response})).catch(handlerError(response));
 }
@@ -42,5 +49,4 @@ const handlerError = (response: ServerResponse) => {
             error: 'Server error!',
         }));
     };
-    
 }
