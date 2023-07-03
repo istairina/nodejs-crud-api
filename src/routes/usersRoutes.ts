@@ -30,7 +30,7 @@ export const routes = ({ userService }: RoutesProps) => ({
     try {
       const user: User = userService.addUser(item);
       response.writeHead(201, DEFAULT_HEADER);
-      response.write("User has been added");
+      response.write("User has been added\n");
       response.write(`ID of new user is ${user.id}`);
       response.end();
     } catch (err) {
@@ -49,6 +49,28 @@ export const routes = ({ userService }: RoutesProps) => ({
       const user = userService.getById(id);
       response.writeHead(200, DEFAULT_HEADER);
       response.write(JSON.stringify({ result: user }));
+      response.end();
+    } catch (err) {
+      if (err === "404") {
+        response.writeHead(404, DEFAULT_HEADER);
+        response.write("Not found");
+        response.end();
+      }
+      if (err === "400") {
+        response.writeHead(400, DEFAULT_HEADER);
+        response.write("User ID is invalid");
+        response.end();
+      }
+    }
+  },
+
+  "/api/users/{uuid}:delete": async ({ request, response }: handlerProps) => {
+    const id = getId("delete", request);
+
+    try {
+      const user = userService.deleteUser(id);
+      response.writeHead(200, DEFAULT_HEADER);
+      response.write("User has been deleted");
       response.end();
     } catch (err) {
       if (err === "404") {

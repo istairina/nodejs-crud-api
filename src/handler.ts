@@ -32,7 +32,10 @@ export const handler: (
 ) => Promise<void> = (request, response) => {
   const { url, method } = request;
   const { pathname } = parse(url, true);
-  const key = `${pathname}:${method.toLowerCase()}`;
+  const uuid = pathname.replace("/api/users", "");
+  const key = `${
+    uuid ? "/api/users/{uuid}" : pathname
+  }:${method.toLowerCase()}`;
   const chosen = allRoutes[key] || allRoutes.default;
   return Promise.resolve(chosen({ request, response })).catch(
     handlerError(response)
