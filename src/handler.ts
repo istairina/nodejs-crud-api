@@ -1,6 +1,4 @@
 
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { IncomingMessage, ServerResponse } from 'node:http';
 import {parse} from 'node:url';
 import { DEFAULT_HEADER } from './util/util.ts';
@@ -16,10 +14,7 @@ export type handlerProps = {
 type allRoutesTypes = {
     [key: string]: ({request, response}: handlerProps) => void;
 }
-
-const currDir = dirname(fileURLToPath(import.meta.url));
-const filePath = join(currDir, './../database', 'db.json');
-const userService: UserService = generateInstance(filePath);
+const userService: UserService = generateInstance();
 
 const userRoutes = routes({userService});
 
@@ -28,7 +23,6 @@ const allRoutes: allRoutesTypes = {
     default: ({response}: handlerProps) => {
         response.writeHead(404, DEFAULT_HEADER);
         response.write('Unknown request. Please try another one');
-        response.statusCode = 404;
         response.end();
     }
 }

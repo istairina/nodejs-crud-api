@@ -1,7 +1,7 @@
 import {randomUUID} from 'node:crypto';
 
 
-type UserConstructorType = {
+export type UserConstructorType = {
     username: string,
     age: number,
     hobbies: string[],

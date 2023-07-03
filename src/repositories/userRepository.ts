@@ -1,28 +1,48 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import User from '../entitites/user.ts';
+import User, { UserConstructorType } from '../entitites/user.ts';
+import { UsersType } from '../models/users.ts';
 
-type UserConstructorRepository = {
-    file: string;
-}
 
 export default class UserRepository {
-    file: string;
-    constructor({file}: UserConstructorRepository) {
-        this.file = file
+    db: UsersType[];
+    constructor() {
+        this.db = []
     }
 
-    async currentFileContent() {
-        return JSON.parse((await readFile(this.file)).toString());
+    getUsers() {
+        return this.db;
     }
 
-    find() {
-        return this.currentFileContent();
+    getUserById(id: string): User | null {
+        return this.db.find((user) => user.id === id) || null;
     }
 
-    async create(data: User) {
-        const currentFile = await this.currentFileContent();
-        currentFile.push(data);
-        await writeFile(this.file, JSON.stringify(currentFile));
-        return data.id;
+    createUser(data: UserConstructorType) {
+        const newUser = new User ({
+            username: data.username,
+            age: data.age,
+            hobbies: data.hobbies
+        });
+        this.db.push(newUser);
+
+        return newUser;
+    }
+
+    updateUser(id: string, data: UserConstructorType) {
+        const userIndex = this.db.findIndex((user) => user.id === id);
+        if (userIndex === -1) return null;
+        this.db[userIndex] = {id: id, username: data.username, age: data.age, hobbies: data.hobbies};
+
+        return this.db[userIndex];
+
+    }
+
+    deleteUser(id: string) {
+        const userIndex = this.db.findIndex((user) => user.id === id);
+        if (userIndex === -1) return null;
+      
+        const deletedUser = this.db[userIndex];
+        this.db.splice(userIndex, 1);
+
+        return deletedUser;
     }
 }
