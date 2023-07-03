@@ -85,4 +85,28 @@ export const routes = ({ userService }: RoutesProps) => ({
       }
     }
   },
+
+  "/api/users/{uuid}:put": async ({ request, response }: handlerProps) => {
+    const id = getId("delete", request);
+    const data = (await once(request, "data")) as string[];
+    const item = JSON.parse(data.join(""));
+
+    try {
+      const user = userService.updateUser(id, item);
+      response.writeHead(200, DEFAULT_HEADER);
+      response.write("User has been updated");
+      response.end();
+    } catch (err) {
+      if (err === "404") {
+        response.writeHead(404, DEFAULT_HEADER);
+        response.write("Not found");
+        response.end();
+      }
+      if (err === "400") {
+        response.writeHead(400, DEFAULT_HEADER);
+        response.write("User ID is invalid");
+        response.end();
+      }
+    }
+  },
 });
