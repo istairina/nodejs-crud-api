@@ -1,10 +1,10 @@
-import {createServer} from 'node:http';
-import { handler } from './handler.ts';
-import dotenv from 'dotenv';
+import { createServer } from "node:http";
+import { handler } from "./handler.ts";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const hostname = '127.0.0.1';
+const hostname = "127.0.0.1";
 const port = process.env.PORT;
 
 export const server = createServer(handler);

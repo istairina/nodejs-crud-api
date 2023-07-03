@@ -34,7 +34,7 @@ npm run server
 
 ---
 
-## Opportinities
+## Opportunities
 
 #### Get all users
 

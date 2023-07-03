@@ -1,48 +1,51 @@
-import User, { UserConstructorType } from '../entitites/user.ts';
-import { UsersType } from '../models/users.ts';
-
+import User, { UserConstructorType } from "../entitites/user.ts";
+import { UsersType } from "../models/users.ts";
 
 export default class UserRepository {
-    db: UsersType[];
-    constructor() {
-        this.db = []
-    }
+  db: UsersType[];
+  constructor() {
+    this.db = [];
+  }
 
-    getUsers() {
-        return this.db;
-    }
+  getUsers() {
+    return this.db;
+  }
 
-    getUserById(id: string): User | null {
-        return this.db.find((user) => user.id === id) || null;
-    }
+  getUserById(id: string): User | null {
+    return this.db.find((user) => user.id === id) || null;
+  }
 
-    createUser(data: UserConstructorType) {
-        const newUser = new User ({
-            username: data.username,
-            age: data.age,
-            hobbies: data.hobbies
-        });
-        this.db.push(newUser);
+  createUser(data: UserConstructorType) {
+    const newUser = new User({
+      username: data.username,
+      age: data.age,
+      hobbies: data.hobbies,
+    });
+    this.db.push(newUser);
 
-        return newUser;
-    }
+    return newUser;
+  }
 
-    updateUser(id: string, data: UserConstructorType) {
-        const userIndex = this.db.findIndex((user) => user.id === id);
-        if (userIndex === -1) return null;
-        this.db[userIndex] = {id: id, username: data.username, age: data.age, hobbies: data.hobbies};
+  updateUser(id: string, data: UserConstructorType) {
+    const userIndex = this.db.findIndex((user) => user.id === id);
+    if (userIndex === -1) return null;
+    this.db[userIndex] = {
+      id: id,
+      username: data.username,
+      age: data.age,
+      hobbies: data.hobbies,
+    };
 
-        return this.db[userIndex];
+    return this.db[userIndex];
+  }
 
-    }
+  deleteUser(id: string) {
+    const userIndex = this.db.findIndex((user) => user.id === id);
+    if (userIndex === -1) return null;
 
-    deleteUser(id: string) {
-        const userIndex = this.db.findIndex((user) => user.id === id);
-        if (userIndex === -1) return null;
-      
-        const deletedUser = this.db[userIndex];
-        this.db.splice(userIndex, 1);
+    const deletedUser = this.db[userIndex];
+    this.db.splice(userIndex, 1);
 
-        return deletedUser;
-    }
+    return deletedUser;
+  }
 }
