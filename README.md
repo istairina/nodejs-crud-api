@@ -20,6 +20,12 @@ cd nodejs-crud-api
 npm install
 ```
 
+#### Create .env file in root folder (you can choose any number)
+
+```
+PORT=3000
+```
+
 #### Start server
 
 ```
