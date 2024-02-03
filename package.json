@@ -4,6 +4,9 @@
   "description": "task for rss https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md",
   "main": "dist/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --exec node --loader ts-node/esm src/server.ts",
     "build": "npx tsc",
