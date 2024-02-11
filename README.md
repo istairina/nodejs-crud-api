@@ -32,6 +32,18 @@ PORT=3000
 npm run server
 ```
 
+#### Run in development mode
+
+```
+npm run start:dev
+```
+
+#### Run in production mode
+
+```
+npm run start:prod
+```
+
 ---
 
 ## Opportunities
@@ -51,7 +63,7 @@ address: 127.0.0.1:3500/api/users
 body: {
     "username": "test name",
     "age": 99,
-    hobbies: ["chess"]
+    "hobbies": ["chess"]
 }
 ```
 
@@ -70,7 +82,7 @@ address: 127.0.0.1:3500/api/users/${userID}
 body: {
     "username": "test name2",
     "age": 100,
-    hobbies: ["chess"]
+    "hobbies": ["chess"]
 }
 ```
 
