@@ -34,11 +34,11 @@ export const routes = ({ userService }: RoutesProps) => ({
       response.write(`ID of new user is ${user.id}`);
       response.end();
     } catch (err) {
-      if (err === "400") {
+      if (err.message === "400") {
         response.writeHead(400, DEFAULT_HEADER);
         response.write("The data is wrong (username, age or hobbies)");
-        response.end();
       }
+      response.end();
     }
   },
 

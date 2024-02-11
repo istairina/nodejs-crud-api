@@ -1,30 +1,58 @@
-import test from "node:test";
-import assert from "node:assert";
-import { promisify } from "node:util";
+import { server } from "../src";
+import { describe, expect } from "@jest/globals";
+import { UsersType } from "../src/models/users";
 
-test("Users tests", async (t) => {
+describe("Users endpoints", () => {
   const testPort = 5005;
-  process.env.PORT = String(testPort);
-  const { server } = await import("../src");
-  const testServerAddress = `http://localhost:${testPort}/users`;
+  const testServerAddress = `http://localhost:${testPort}/api/users`;
 
-  await t.test("it should create a user", async () => {
+  beforeAll(() => {
+    server.close();
+
+    process.env.PORT = String(testPort);
+
+    server.listen(testPort);
+  });
+
+  afterAll((done) => {
+    server.close();
+    done();
+  });
+
+  test("it should create a user", async () => {
     const data = {
       username: "IM",
       age: 88,
       hobbies: ["chess", "reading"],
     };
 
-    const request = await fetch(testServerAddress, {
+    const mistakenData = {
+      username: "IM",
+      hobbies: ["chess", "reading"],
+    };
+
+    const response = await fetch(testServerAddress, {
       method: "POST",
       body: JSON.stringify(data),
     });
 
-    assert.deepStrictEqual(
-      request.headers.get("content-type"),
-      "application/json"
-    );
-    assert.strictEqual(request.status, 201);
+    expect(response.status).toBe(201);
+
+    const mistakenResponse = await fetch(testServerAddress, {
+      method: "POST",
+      body: JSON.stringify(mistakenData),
+    });
+
+    expect(mistakenResponse.status).toBe(400);
   });
-  await promisify(server.close.bind(server))();
+
+  test("it should get users", async () => {
+    const response = await fetch(testServerAddress, {
+      method: "GET",
+    });
+
+    const responseData = (await response.json()) as { results: UsersType[] };
+
+    expect(responseData.results.length).toBeGreaterThan(0);
+  });
 });
