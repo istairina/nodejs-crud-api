@@ -68,7 +68,7 @@ export const routes = ({ userService }: RoutesProps) => ({
     const id = getId("delete", request);
 
     try {
-      const user = userService.deleteUser(id);
+      userService.deleteUser(id);
       response.writeHead(200, DEFAULT_HEADER);
       response.write("User has been deleted");
       response.end();
@@ -92,7 +92,7 @@ export const routes = ({ userService }: RoutesProps) => ({
     const item = JSON.parse(data.join(""));
 
     try {
-      const user = userService.updateUser(id, item);
+      userService.updateUser(id, item);
       response.writeHead(200, DEFAULT_HEADER);
       response.write("User has been updated");
       response.end();
