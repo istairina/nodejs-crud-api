@@ -17,7 +17,7 @@ export const routes = ({ userService }: RoutesProps) => ({
       response.write(JSON.stringify({ results: users }));
       response.end();
     } catch (err) {
-      if (err === "404") {
+      if (err.message === "404") {
         response.writeHead(404, DEFAULT_HEADER);
         response.write("Not found");
         response.end();
@@ -51,12 +51,12 @@ export const routes = ({ userService }: RoutesProps) => ({
       response.write(JSON.stringify({ result: user }));
       response.end();
     } catch (err) {
-      if (err === "404") {
+      if (err.message === "404") {
         response.writeHead(404, DEFAULT_HEADER);
         response.write("Not found");
         response.end();
       }
-      if (err === "400") {
+      if (err.message === "400") {
         response.writeHead(400, DEFAULT_HEADER);
         response.write("User ID is invalid");
         response.end();
@@ -73,12 +73,12 @@ export const routes = ({ userService }: RoutesProps) => ({
       response.write("User has been deleted");
       response.end();
     } catch (err) {
-      if (err === "404") {
+      if (err.message === "404") {
         response.writeHead(404, DEFAULT_HEADER);
         response.write("Not found");
         response.end();
       }
-      if (err === "400") {
+      if (err.message === "400") {
         response.writeHead(400, DEFAULT_HEADER);
         response.write("User ID is invalid");
         response.end();
@@ -97,12 +97,12 @@ export const routes = ({ userService }: RoutesProps) => ({
       response.write("User has been updated");
       response.end();
     } catch (err) {
-      if (err === "404") {
+      if (err.message === "404") {
         response.writeHead(404, DEFAULT_HEADER);
         response.write("Not found");
         response.end();
       }
-      if (err === "400") {
+      if (err.message === "400") {
         response.writeHead(400, DEFAULT_HEADER);
         response.write("User ID is invalid");
         response.end();
