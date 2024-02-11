@@ -92,3 +92,11 @@ body: {
 method: delete
 address: 127.0.0.1:3500/api/users/${userID}
 ```
+
+---
+
+##Test
+
+```
+npm run test
+```
