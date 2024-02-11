@@ -1,5 +1,5 @@
-import User, { UserConstructorType } from "../entitites/user.ts";
-import { UsersType } from "../models/users.ts";
+import User, { UserConstructorType } from "../entitites/user";
+import { UsersType } from "../models/users";
 
 export default class UserRepository {
   db: UsersType[];

@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { handler } from "./handler.ts";
+import { handler } from "./handler";
 import dotenv from "dotenv";
 
 dotenv.config();

@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "target": "es6",
-    "sourceMap": true,
+    "target": "ESNext",
+    "sourceMap": false,
     "outDir": "dist",
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "composite": true
+    // "allowImportingTsExtensions": true,
+    // "emitDeclarationOnly": false,
+    // "noEmit": true,
+    "declaration": false,
+    // "composite": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
   },
-  "lib": ["es2020"],
-  "include": ["**/*", "src"],
+  "lib": ["ESNext"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

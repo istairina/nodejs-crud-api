@@ -1,5 +1,5 @@
-import UserRepository from "../repositories/userRepository.ts";
-import UserService from "../services/userService.ts";
+import UserRepository from "../repositories/userRepository";
+import UserService from "../services/userService";
 
 export const generateInstance = () => {
   const userRepository = new UserRepository();

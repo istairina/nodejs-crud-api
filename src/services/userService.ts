@@ -1,7 +1,7 @@
 import { UserConstructorType } from "../entitites/user";
-import UserRepository from "../repositories/userRepository.ts";
-import { validateUUID } from "./validateUUID.ts";
-import { validateUser } from "./validateUser.ts";
+import UserRepository from "../repositories/userRepository";
+import { validateUUID } from "./validateUUID";
+import { validateUser } from "./validateUser";
 
 export default class UserService {
   userRepository: UserRepository;

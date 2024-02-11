@@ -1,9 +1,9 @@
 import { IncomingMessage, ServerResponse } from "node:http";
 import { parse } from "node:url";
-import { DEFAULT_HEADER } from "./util/util.ts";
-import { routes } from "./routes/usersRoutes.ts";
-import { generateInstance } from "./factory/userFactory.ts";
-import UserService from "./services/userService.ts";
+import { DEFAULT_HEADER } from "./util/util";
+import { routes } from "./routes/usersRoutes";
+import { generateInstance } from "./factory/userFactory";
+import UserService from "./services/userService";
 
 export type handlerProps = {
   request?: IncomingMessage;

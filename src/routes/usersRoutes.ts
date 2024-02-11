@@ -1,9 +1,9 @@
-import { DEFAULT_HEADER } from "../util/util.ts";
+import { DEFAULT_HEADER } from "../util/util";
 import { once } from "node:events";
-import User from "../entitites/user.ts";
-import UserService from "../services/userService.ts";
-import { handlerProps } from "../handler.ts";
-import { getId } from "./getId.ts";
+import User from "../entitites/user";
+import UserService from "../services/userService";
+import { handlerProps } from "../handler";
+import { getId } from "./getId";
 
 type RoutesProps = {
   userService: UserService;
