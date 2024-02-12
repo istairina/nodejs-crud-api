@@ -1,40 +1,22 @@
-import { createServer } from "node:http";
-import { handler } from "./handler";
+import cluster from "cluster";
+import { cpus } from "os";
 import dotenv from "dotenv";
-import cluster from 'cluster';
-import os from "node:os";
+import { server } from "./server"; // Import your server setup
 
 dotenv.config();
 
-const numCPUs = os.cpus().length;
-
-const hostname = "127.0.0.1";
-const port = process.env.PORT;
+const numCPUs = cpus().length;
+const port = Number(process.env.PORT) || 3000;
 
 if (cluster.isPrimary) {
-  console.log(`Primary ${process.pid} is running at http://${hostname}:${port}`);
-  const pidToPort: { [key: number]: number } = {};
+  console.log(`Primary ${process.pid} is running on port ${port}`);
+
   for (let i = 0; i < numCPUs; i++) {
-    const worker = cluster.fork({ port: Number(port) + i + 1 });
-    pidToPort[worker.process.pid] = Number(port) + i + 1;
-
-  };
-  console.log("pidToPort", pidToPort)
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} died`);
     cluster.fork();
-  })
-
+  }
 } else {
-  const server = createServer(handler);
-
-  server.listen(port, () => {
-    console.log(`Worker is running at http://${hostname}:${port}`);
+  const newPort = port + cluster.worker.id;
+  server.listen(newPort, () => {
+    console.log(`Worker ${process.pid} started on port ${newPort}`);
   });
 }
-
-
-
-export const server = createServer(handler);
-
-
