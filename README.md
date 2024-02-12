@@ -101,6 +101,8 @@ address: 127.0.0.1:3500/api/users/${userID}
 npm run test
 ```
 
+_Stop existing server before run tests_
+
 ## Horizontal scaling with load balancer
 
 _It's working only with scaling, but DB is not sharingm so each worker has own database._
@@ -108,3 +110,5 @@ _It's working only with scaling, but DB is not sharingm so each worker has own d
 ```
 npm run start:multi
 ```
+
+_To see workers in console do something with server_
