@@ -70,7 +70,7 @@ export const routes = ({ userService }: RoutesProps) => ({
 
     try {
       userService.deleteUser(id);
-      response.writeHead(200, DEFAULT_HEADER);
+      response.writeHead(204, DEFAULT_HEADER);
       response.write("User has been deleted");
       response.end();
     } catch (err) {
@@ -93,9 +93,10 @@ export const routes = ({ userService }: RoutesProps) => ({
     const item = JSON.parse(data.join(""));
 
     try {
-      userService.updateUser(id, item);
+      const user = userService.updateUser(id, item);
       response.writeHead(200, DEFAULT_HEADER);
-      response.write("User has been updated");
+      response.write("User has been updated\n");
+      response.write(JSON.stringify({ user }));
       response.end();
     } catch (err) {
       if (err.message === "404") {
@@ -105,7 +106,9 @@ export const routes = ({ userService }: RoutesProps) => ({
       }
       if (err.message === "400") {
         response.writeHead(400, DEFAULT_HEADER);
-        response.write("User ID is invalid");
+        response.write(
+          "User ID is invalid or the data is wrong (username, age or hobbies)"
+        );
         response.end();
       }
     }

@@ -32,7 +32,10 @@ export const handler: (
 ) => Promise<void> = (request, response) => {
   const { url, method } = request;
   const { pathname } = parse(url, true);
-  const uuid = pathname.replace("/api/users", "");
+  let uuid = pathname.replace("/api/users", "");
+  if (uuid === "/") {
+    uuid = "";
+  }
   const key = `${
     uuid ? "/api/users/{uuid}" : pathname
   }:${method.toLowerCase()}`;
