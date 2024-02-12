@@ -7,7 +7,6 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon --exec node --loader ts-node/esm src/server.ts",
     "build": "webpack",
     "start": "node dist/bundle.js",
     "start:dev": "nodemon --exec npx ts-node src/index.ts",

@@ -10,5 +10,5 @@ const port = process.env.PORT;
 export const server = createServer(handler);
 
 server.listen(port, () => {
-  console.log(`Server is running at http://${hostname}:${port}/`);
+  console.log(`Server is running at http://${hostname}:${port}`);
 });
