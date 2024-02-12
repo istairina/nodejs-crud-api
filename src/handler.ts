@@ -21,7 +21,7 @@ const allRoutes: allRoutesTypes = {
   ...userRoutes,
   default: ({ response }: handlerProps) => {
     response.writeHead(404, DEFAULT_HEADER);
-    response.write("Unknown request. Please try another one");
+    response.write("Non-existing endpoint. Please try another one");
     response.end();
   },
 };
@@ -34,9 +34,11 @@ export const handler: (
   const { pathname } = parse(url, false);
   const uuid = pathname.replace("/api/users", "").replace(/\/+$/, "");
 
-  const key = `${
-    uuid ? "/api/users/{uuid}" : pathname.replace(/\/+$/, "")
-  }:${method.toLowerCase()}`;
+  const key = pathname.includes("/api/users")
+    ? `${
+        uuid ? "/api/users/{uuid}" : pathname.replace(/\/+$/, "")
+      }:${method.toLowerCase()}`
+    : pathname;
   const chosen = allRoutes[key] || allRoutes.default;
   return Promise.resolve(chosen({ request, response })).catch(
     handlerError(response)
