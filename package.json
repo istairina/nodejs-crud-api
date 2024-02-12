@@ -14,7 +14,7 @@
     "start:multi": "nodemon --exec npx ts-node src/index-cluster.ts",
     "lint": "eslint . --ext .ts",
     "test": "jest  ./tests",
-    "server": "ts-node --esm src/index.ts"
+    "server": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",

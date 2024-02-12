@@ -31,7 +31,8 @@ export const routes = ({ userService }: RoutesProps) => ({
       const user: User = userService.addUser(item);
       response.writeHead(201, DEFAULT_HEADER);
       response.write("User has been added\n");
-      response.write(`ID of new user is ${user.id}`);
+      response.write(`ID of new user is ${user.id}\n`);
+      response.write(JSON.stringify({ user }));
       response.end();
     } catch (err) {
       if (err.message === "400") {
