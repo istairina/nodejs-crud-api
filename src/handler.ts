@@ -31,13 +31,11 @@ export const handler: (
   arg1: ServerResponse
 ) => Promise<void> = (request, response) => {
   const { url, method } = request;
-  const { pathname } = parse(url, true);
-  let uuid = pathname.replace("/api/users", "");
-  if (uuid === "/") {
-    uuid = "";
-  }
+  const { pathname } = parse(url, false);
+  const uuid = pathname.replace("/api/users", "").replace(/\/+$/, "");
+
   const key = `${
-    uuid ? "/api/users/{uuid}" : pathname
+    uuid ? "/api/users/{uuid}" : pathname.replace(/\/+$/, "")
   }:${method.toLowerCase()}`;
   const chosen = allRoutes[key] || allRoutes.default;
   return Promise.resolve(chosen({ request, response })).catch(
