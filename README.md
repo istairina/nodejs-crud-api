@@ -100,3 +100,11 @@ address: 127.0.0.1:3500/api/users/${userID}
 ```
 npm run test
 ```
+
+## Horizontal scaling with load balancer
+
+_It's working only with scaling, but DB is not sharingm so each worker has own database._
+
+```
+npm run start:multi
+```
