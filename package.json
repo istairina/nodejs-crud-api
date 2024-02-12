@@ -12,6 +12,7 @@
     "start": "node dist/bundle.js",
     "start:dev": "nodemon --exec npx ts-node src/index.ts",
     "start:prod": "npm run build && npm run start",
+    "start:multi": "nodemon --exec npx ts-node src/index-cluster.ts",
     "lint": "eslint . --ext .ts",
     "test": "jest  ./tests",
     "server": "ts-node --esm src/index.ts"
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/istairina/nodejs-crud-api#readme",
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
